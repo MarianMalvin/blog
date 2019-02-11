@@ -23,6 +23,9 @@ class Tag(models.Model):
     def get_edit_url(self):
         return reverse('tag_edit_url', kwargs={'slug': self.slug})
 
+    def get_delete_url(self):
+        return reverse('tag_delete_url', kwargs={'slug': self.slug})
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
@@ -40,6 +43,9 @@ class Post(models.Model):
 
     def get_edit_url(self):
         return reverse('post_edit_url', kwargs={'slug': self.slug})
+
+    def get_delete_url(self):
+        return reverse('post_delete_url', kwargs={'slug': self.slug})
 
     def __str__(self):
         return f"{self.title}"

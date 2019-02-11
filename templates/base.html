@@ -1,7 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <title>
@@ -44,8 +46,12 @@
                 There is no any content
             {% endblock %}
         </div>
+
     </div>
 </div>
-
+<div class="admin-panel align-items-center">
+    <a class="btn btn-outline-info" href="/admin">Admin</a>
+    {% block admin-panel %}{% endblock %}
+</div>
 </body>
 </html>

@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-
-from blog.forms import TagForm
+from django.urls import reverse
 
 
 class ObjectDetailMixin:
@@ -46,3 +45,17 @@ class ObjectUpdateMixin:
             return redirect(updated_tag)
         return render(request, 'blog/tag_update.html',
                       context={self.model.__name__.lower(): obj, 'bound_form': bound_form})
+
+
+class ObjectDeleteMixin:
+    model = None
+    template = None
+    redirect_url = None
+    def get(self, request, slug):
+        obj = self.model.objects.get(slug=slug)
+        return render(request, self.template, context={self.model.__name__.lower(): obj})
+
+    def post(self, request, slug):
+        obj = self.model.objects.get(slug=slug)
+        obj.delete()
+        return redirect(self.redirect_url)
