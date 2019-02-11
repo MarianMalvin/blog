@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
+from blog.forms import TagForm
+
 
 class ObjectDetailMixin:
     model = None
@@ -24,3 +26,23 @@ class ObjectCreateMixin:
             new_obj = bound_form.save()
             return redirect(new_obj)
         return render(request, self.template, context={'form': bound_form})
+
+
+class ObjectUpdateMixin:
+    model = None
+    template = None
+    model_form = None
+
+    def get(self, request, slug):
+        obj = self.model.objects.get(slug=slug)
+        bound_form = self.model_form(instance=obj)
+        return render(request, self.template, context={self.model.__name__.lower(): obj, 'bound_form': bound_form})
+
+    def post(self, request, slug):
+        obj = self.model.objects.get(slug=slug)
+        bound_form = self.model_form(request.POST, instance=obj)
+        if bound_form.is_valid():
+            updated_tag = bound_form.save()
+            return redirect(updated_tag)
+        return render(request, 'blog/tag_update.html',
+                      context={self.model.__name__.lower(): obj, 'bound_form': bound_form})
