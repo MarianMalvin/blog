@@ -36,7 +36,8 @@ class PostDelete(ObjectDeleteMixin, View):
     template = 'blog/post_delete.html'
     redirect_url = 'posts_list_url'
 
-class TagDetail(ObjectDeleteMixin, View):
+
+class TagDetail(ObjectDetailMixin, View):
     model = Tag
     template = 'blog/tag_detail.html'
 
