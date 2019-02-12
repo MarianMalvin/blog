@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.views import View
 
 from blog.forms import PostForm, TagForm
@@ -8,7 +9,12 @@ from .utils import *
 
 
 def post_list(request):
-    paginator = Paginator(Post.objects.all(), 5)
+    search_query = request.GET.get('search', '')
+    if search_query:
+        posts = Post.objects.filter(Q(body__icontains=search_query), Q(body__icontains=search_query))
+    else:
+        posts = Post.objects.all()
+    paginator = Paginator(posts, 5)
     page = paginator.get_page(request.GET.get('page', 1))
     return render(request, 'blog/index.html', context=({'page': page, 'current_page': page.number}))
 
