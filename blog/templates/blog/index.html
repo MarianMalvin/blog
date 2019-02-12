@@ -6,8 +6,48 @@
 
 {% block content %}
     <h1 class="mb-4">Posts</h1>
-    {% for post in posts %}
+
+    {% for post in page %}
         {% include 'blog/includes/post_card_template.html' %}
     {% endfor %}
+
+    {% if page.has_other_pages %}
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item {% if not page.has_previous %}disabled{% endif %}">
+                    <a class="page-link"
+                       href="?page={% if page.has_previous %}{{ page.previous_page_number }}{% endif %}">Previous</a>
+                </li>
+                {% if not page.number == 1 and not page.number == 2 and not page.number == 3 %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">1</a>
+                    </li>
+                {% endif %}
+
+
+                {% for n in page.paginator.page_range %}
+                    {% if n == page.number %}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="?page={{ n }}">{{ n }} <span class="sr-only">(current)</span></a>
+                        </li>
+                    {% elif n > page.number|add:-3 and n < page.number|add:3 %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ n }}">{{ n }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% if not page.number == page.paginator.num_pages and not page.number == page.paginator.num_pages|add:-1 and not page.number == page.paginator.num_pages|add:-2 %}
+                    <li class="page-item">
+                    <a class="page-link" href="?page={{ page.paginator.num_pages }}">{{ page.paginator.num_pages }}</a>
+                </li>
+                {% endif %}
+
+                <li class="page-item {% if not page.has_next %}disabled{% endif %}">
+                    <a class="page-link"
+                       href="?page={% if page.has_next %}{{ page.next_page_number }}{% endif %}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    {% endif %}
 {% endblock %}
 

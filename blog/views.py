@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.views import View
 
 from blog.forms import PostForm, TagForm
@@ -7,8 +8,9 @@ from .utils import *
 
 
 def post_list(request):
-    posts = Post.objects.all()
-    return render(request, 'blog/index.html', context=({'posts': posts}))
+    paginator = Paginator(Post.objects.all(), 5)
+    page = paginator.get_page(request.GET.get('page', 1))
+    return render(request, 'blog/index.html', context=({'page': page, 'current_page': page.number}))
 
 
 def tags_list(request):
@@ -64,4 +66,3 @@ class TagDelete(LoginRequiredMixin, ObjectDeleteMixin, View):
     template = 'blog/tag_delete.html'
     redirect_url = 'tags_list_url'
     raise_exception = True
-

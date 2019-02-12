@@ -30,13 +30,16 @@ class Tag(models.Model):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
+    class Meta:
+        ordering = ['title']
+
 
 class Post(models.Model):
     title = models.CharField(max_length=150, db_index=True)
     slug = models.SlugField(max_length=150, unique=True, blank=True)
     body = models.TextField(blank=True, db_index=True)
     tags = models.ManyToManyField(Tag, blank=True, related_name='posts')
-    date_pub = models.DateField(auto_now_add=True)
+    pub_date = models.DateField(auto_now_add=True)
 
     def get_absolute_url(self):
         return reverse('post_detail_url', kwargs={'slug': self.slug})
@@ -54,3 +57,6 @@ class Post(models.Model):
         if not self.id:
             self.slug = gen_slug(self.title)
         super().save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['-pub_date']
