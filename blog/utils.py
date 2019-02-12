@@ -1,5 +1,6 @@
+from pprint import pprint
+
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
 
 
 class ObjectDetailMixin:
@@ -16,6 +17,8 @@ class ObjectCreateMixin:
     template = None
 
     def get(self, request):
+        pprint(dir(request))
+        pprint(dir(request.user))
         obj = self.form()
         return render(request, self.template, context=({'form': obj}))
 
@@ -51,6 +54,7 @@ class ObjectDeleteMixin:
     model = None
     template = None
     redirect_url = None
+
     def get(self, request, slug):
         obj = self.model.objects.get(slug=slug)
         return render(request, self.template, context={self.model.__name__.lower(): obj})
