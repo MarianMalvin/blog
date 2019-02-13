@@ -136,5 +136,3 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), os.path.join("my_site", "s
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
