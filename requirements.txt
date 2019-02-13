@@ -1,3 +1,5 @@
+Django==2.1.5
+gunicorn==19.7.1
 asttokens==1.1.13
 birdseye==0.8.2
 cached-property==1.5.1
@@ -5,7 +7,6 @@ certifi==2018.11.29
 chardet==3.0.4
 cheap-repr==0.2.0
 Click==7.0
-Django==2.1.5
 Flask==1.0.2
 Flask-Humanize==0.3.0
 future==0.17.1
