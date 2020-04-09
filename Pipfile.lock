@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d69f5672229fa0c85eb7386370ffa3c1513300d0c338271ea03985dcf6e8b06e"
+            "sha256": "5700a150a0f4ef134376f4b73650d8d8d3f857c30d8120910f5da6299b9439ad"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -300,18 +300,18 @@
         },
         "sqlparse": {
             "hashes": [
-                "sha256:40afe6b8d4b1117e7dff5504d7a8ce07d9a1b15aeeade8a2d10f130a834f8177",
-                "sha256:7c3dca29c022744e95b547e867cee89f4fce4373f3549ccd8797d8eb52cdb873"
+                "sha256:022fb9c87b524d1f7862b3037e541f68597a730a8843245c349fc93e1643dc4e",
+                "sha256:e162203737712307dfe78860cc56c8da8a852ab2ee33750e33aeadf38d12c548"
             ],
-            "version": "==0.3.0"
+            "version": "==0.3.1"
         },
         "urllib3": {
             "hashes": [
-                "sha256:61bf29cada3fc2fbefad4fdf059ea4bd1b4a86d2b6d15e1c7c0b582b9752fe39",
-                "sha256:de9529817c93f27c8ccbfead6985011db27bd0ddfcdb2d86f3f663385c6a9c22"
+                "sha256:4c291ca23bbb55c76518905869ef34bdd5f0e46af7afe6861e8375643ffee1a0",
+                "sha256:9a247273df709c4fedb38c711e44292304f73f39ab01beda9f6b9fc375669ac3"
             ],
             "index": "pypi",
-            "version": "==1.24.1"
+            "version": "==1.24.2"
         },
         "werkzeug": {
             "hashes": [
